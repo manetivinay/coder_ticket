@@ -1,14 +1,14 @@
-# Homework 3 - *Name of App*
+# Homework 3 - *Billet Ami* [![Build Status](https://travis-ci.org/nongdenchet/coder_ticket.svg?branch=master)](https://travis-ci.org/nongdenchet/coder_ticket)
 
-**Name of your app** is a Ruby on Rails blog application that allows users to create and buy tickets to cool events. 
+**Billet Ami** is a Ruby on Rails blog application that allows users to create and buy tickets to cool events. 
 
-Submitted by: **Your Name Here**
+Submitted by: **Vũ Huy Quân**
 
 Time spent: **X** hours
 
 URL: **Insert your Heroku URL here**
 
-SimpleCov Test Coverage: **Insert percentage or link to report here**
+SimpleCov Test Coverage: [![Coverage Status](https://coveralls.io/repos/github/nongdenchet/coder_ticket/badge.svg?branch=master)](https://coveralls.io/github/nongdenchet/coder_ticket?branch=master)
 
 ## User Stories
 
