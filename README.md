@@ -6,7 +6,7 @@ Submitted by: **Vũ Huy Quân**
 
 Time spent: **X** hours
 
-URL: **Insert your Heroku URL here**
+URL: **https://billetami.herokuapp.com/**
 
 SimpleCov Test Coverage: [![Coverage Status](https://coveralls.io/repos/github/nongdenchet/coder_ticket/badge.svg?branch=master)](https://coveralls.io/github/nongdenchet/coder_ticket?branch=master)
 
