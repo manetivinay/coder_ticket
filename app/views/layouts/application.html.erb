@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CoderTicker</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <title>Snappy Chat</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-no-turbolink>
 
-<%= yield %>
+<%= render 'share/navbar' %>
+<%= render 'share/message' %>
+
+<main style="margin-bottom: 48px">
+  <%= yield %>
+</main>
+
+<%= render 'share/action' %>
 
 </body>
 </html>
+
+<script>
+  $(document).ready(function () {
+    $('input#input_text, textarea#textarea1').characterCounter();
+    $('select').material_select();
+  });
+</script>

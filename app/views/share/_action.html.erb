@@ -1,0 +1,14 @@
+<% if sign_in? %>
+    <div class="fixed-action-btn identity-btn">
+      <%= link_to edit_user_path(current_user), class: 'btn-floating btn-large waves-effect waves-light red' do %>
+          <i class="material-icons">perm_identity</i>
+      <% end %>
+    </div>
+
+    <div class="fixed-action-btn message-btn">
+      <%= link_to new_message_path, class: 'btn-floating btn-large waves-effect waves-light red' do %>
+          <i class="material-icons">mode_edit</i>
+      <% end %>
+    </div>
+<% end %>
+
