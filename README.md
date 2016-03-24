@@ -33,8 +33,8 @@ The following **required** functionality is complete:
 
 #### Users
 
-* [ ] User can sign up by providing their email, password, and name. 
-* [ ] User can login using an email and password. 
+* [x] User can sign up by providing their email, password, and name. 
+* [x] User can login using an email and password. 
 * [ ] Users can create events. 
 * [ ] Users must click "publish event" before an event becomes viewable to other users. 
 * [ ] Users can create ticket types for that event. 
@@ -45,7 +45,7 @@ The following **required** functionality is complete:
 
 ### Optional Stories
 
-* [ ] Users can log in with Facebook.
+* [x] Users can log in with Facebook.
 * [ ] Users receive an email when they have purchased a ticket.
 * [ ] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
 * [ ] User A can allow User B to edit User A's event. In other words, an event owner can assign other people to be "event admins". 

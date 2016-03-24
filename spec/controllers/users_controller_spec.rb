@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :controller do
   context 'POST #create' do
     context 'create account successfully' do
       before(:each) do
-        post :create, user: attributes_for(:user)
+        post :create, user: attributes_for(:user), format: :js
       end
 
       it 'should register successfully' do
@@ -26,16 +26,12 @@ RSpec.describe UsersController, type: :controller do
         expect(User.first.name).to eq('nongdenchet')
       end
 
-      it 'should show success flash' do
-        expect(flash[:notice]).to eq('Register successfully')
+      it 'user should be valid' do
+        expect(assigns(:user).persisted?).to eq(true)
       end
 
       it 'should store user id' do
         expect(session[:user_id]).to eq(User.first.id)
-      end
-
-      it 'should redirect to root path' do
-        expect(response).to redirect_to(users_path)
       end
     end
 
@@ -49,9 +45,9 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'register fail' do
-      it 'should render new' do
-        post :create, user: attributes_for(:user, email: '123')
-        expect(response).to render_template(:new)
+      it 'should not be store' do
+        post :create, user: attributes_for(:user, email: '123'), format: :js
+        expect(assigns(:user).new_record?).to eq(true)
       end
     end
   end
@@ -75,7 +71,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should require login' do
       get :edit, id: @user.id
-      expect(response).to redirect_to new_sessions_path
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -107,7 +103,7 @@ RSpec.describe UsersController, type: :controller do
 
     it 'should redirect to login' do
       post :update, id: @user.id, user: attributes_for(:user)
-      expect(response).to redirect_to new_sessions_path
+      expect(response).to redirect_to root_path
     end
   end
 end

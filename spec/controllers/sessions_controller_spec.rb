@@ -18,12 +18,8 @@ RSpec.describe SessionsController, type: :controller do
         expect(session[:user_id]).to eq(1)
       end
 
-      it 'should show flash' do
-        expect(flash[:notice]).to eq('Login successfully')
-      end
-
       it 'should redirect to users_path' do
-        expect(response).to redirect_to users_path
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -46,19 +42,15 @@ RSpec.describe SessionsController, type: :controller do
   context 'POST #create' do
     context 'valid email password' do
       before(:each) do
-        post :create, email: 'nongdenchet@gmail.com', password: 'androidDeveloper'
-      end
-
-      it 'should login successfully' do
-        expect(response).to redirect_to(root_path)
-      end
-
-      it 'should show successful flash' do
-        expect(flash[:notice]).to eq('Login successfully')
+        post :create, email: 'nongdenchet@gmail.com', password: 'androidDeveloper', format: :js
       end
 
       it 'should store user id' do
         expect(session[:user_id]).to eq(@user.id)
+      end
+
+      it 'should have valid authentication' do
+        expect(assigns(:authenticate).name).to eq('nongdenchet')
       end
     end
 
@@ -72,11 +64,11 @@ RSpec.describe SessionsController, type: :controller do
 
     context 'invalid email password' do
       before(:each) do
-        post :create, {email: 'nongdenchet@gmail.com', password: '123'}
+        post :create, email: 'nongdenchet@gmail.com', password: '123', format: :js
       end
 
-      it 'should show invalid flash' do
-        expect(flash[:alert]).to eq('Invalid email or password')
+      it 'should have invalid authentication' do
+        expect(assigns(:authenticate)).to eq(false)
       end
     end
   end
