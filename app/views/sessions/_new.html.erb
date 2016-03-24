@@ -1,0 +1,25 @@
+<div id="login-modal" class="modal" style="height: 40%">
+  <div class="modal-content">
+    <div class="row">
+      <h4>Login</h4>
+      <%= form_tag sessions_path, class: 'input-form', style: 'margin-top: 24px', remote: true do %>
+          <div class="input-field">
+            <input id="email" name="email" type="text" value="<%= params[:email] %>">
+            <label for="email" id="label-input">Email</label>
+          </div>
+
+          <div class="input-field">
+            <input id="password" name="password" type="password">
+            <label for="password" id="label-input">Password</label>
+          </div>
+
+          <button class="btn waves-effect waves-light" type="submit" name="action">
+            Login
+          </button>
+
+          <a class="btn waves-effect waves-light" href="/auth/facebook">Login with facebook</a>
+      <% end %>
+    </div>
+  </div>
+</div>
+

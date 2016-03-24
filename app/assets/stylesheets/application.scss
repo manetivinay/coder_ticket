@@ -14,11 +14,32 @@ button:focus {
   box-shadow: 0 1px 0 0 #90B63E;
 }
 
+.input-field label {
+  left: 0;
+}
+
+.modal {
+  width: 40%;
+  height: 60%;
+}
+
+.notice {
+  background-color: #4caf50;
+}
+
+.alert {
+  background-color: #f44336;
+}
+
 .btn {
   background-color: #90B63E;
 }
 
 .btn:hover {
+  background-color: #90B63E;
+}
+
+.btn:focus {
   background-color: #90B63E;
 }
 

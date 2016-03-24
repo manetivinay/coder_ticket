@@ -1,0 +1,5 @@
+<% if @user.new_record? %>
+  $("#user-error").html("<%= j(render 'share/model_error', object: @user) %>");
+<% else %>
+  location.href = '<%= root_path %>';
+<% end %>
