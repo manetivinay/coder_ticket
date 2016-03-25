@@ -14,6 +14,16 @@ button:focus {
   box-shadow: 0 1px 0 0 #90B63E;
 }
 
+input[type=text].valid {
+  border-bottom: 1px solid #90B63E;
+  box-shadow: 0 1px 0 0 #90B63E;
+}
+
+input[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #90B63E;
+  box-shadow: 0 1px 0 0 #90B63E;
+}
+
 .input-field label {
   left: 0;
 }

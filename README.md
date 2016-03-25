@@ -25,11 +25,11 @@ The following **required** functionality is complete:
 
 #### Tickets
 
-* [ ] Each event can have multiple types of tickets, each with a different `price` and `max_quantity`. 
-* [ ] Users can buy tickets to an event, choose the types of tickets, and the quantity of tickets.
-* [ ] Users cannot buy more tickets than the quantity available.
-* [ ] Users can only buy up to 10 of a ticket type at a time.
-* [ ] Users cannot buy tickets to events that occur in the past. 
+* [x] Each event can have multiple types of tickets, each with a different `price` and `max_quantity`. 
+* [x] Users can buy tickets to an event, choose the types of tickets, and the quantity of tickets.
+* [x] Users cannot buy more tickets than the quantity available.
+* [x] Users can only buy up to 10 of a ticket type at a time.
+* [x] Users cannot buy tickets to events that occur in the past. 
 
 #### Users
 
@@ -46,7 +46,7 @@ The following **required** functionality is complete:
 ### Optional Stories
 
 * [x] Users can log in with Facebook.
-* [v] Users receive an email when they have purchased a ticket.
+* [x] Users receive an email when they have purchased a ticket.
 * [v] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
 * [v] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
 * [v] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".

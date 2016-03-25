@@ -1,0 +1,109 @@
+<div class="row" style="margin-top: 32px">
+  <%= form_tag orders_path, method: :post, remote: true do %>
+      <div class="col m8">
+        <table class="bordered centered striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <%= render partial: 'ticket_types/ticket_type_row',
+                     collection: @ticket_types, as: :ticket_type %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col m4">
+        <div class="card">
+          <div class="card-content">
+            <table class="bordered centered striped">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+              </thead>
+
+              <tbody id="ticket-body">
+              <tr>
+                <td>Total</td>
+                <td></td>
+                <td>
+                  <input type="hidden" id="total_money" name="order[total_money]" value="0">
+                  <b id="total">0 VND</b>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+
+            <!-- Personal Info -->
+            <%= render 'orders/personal_info' %>
+
+            <!-- Action button -->
+            <b>
+              <button class="btn waves-effect waves-light" type="submit"
+                      name="action" id="btn-book" style="margin-top: 16px">
+                Check Out
+              </button>
+            </b>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<script>
+  // Number formatter
+  Number.prototype.format = function (n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.') + " VND";
+  };
+
+  // Add listener for input change
+  <% @ticket_types.each do |type| %>
+  $('#input-<%= type.id %>').change(function () {
+    var money = ($(this).val() * <%= type.price %>).format();
+    handleValueChange('<%= type.id %>', '<%= type.name %>', $(this).val(), money);
+  });
+  <% end %>
+
+  // Handle value change
+  handleValueChange = function (id, name, quantity, money) {
+    var target = $('#output-' + id);
+    if (target.length == 0 && quantity > 0) {
+      $('#ticket-body').prepend(
+          "<tr id='output-" + id + "'>"
+          + "<td>" + name + "</td>"
+          + "<td id='quantity-" + id + "'>" + quantity + "</td>"
+          + "<td id='money-" + id + "'>" + money + "</td>"
+          + "</tr>"
+      );
+    } else if (target.length > 0 && quantity == 0) {
+      target.remove();
+    } else {
+      $('#money-' + id).text(money);
+      $('#quantity-' + id).text(quantity);
+    }
+    updateTotal();
+  };
+
+  // Calculate total amount
+  calculateTotal = function () {
+    var total = 0;
+    <% @ticket_types.each do |type| %>
+    total += $('#input-<%= type.id %>').val() * <%= type.price %>;
+    <% end %>
+    return total;
+  };
+
+  // Update total
+  updateTotal = function () {
+    $('#total').text(calculateTotal().format());
+    $('#total_money').val(calculateTotal());
+  }
+</script>

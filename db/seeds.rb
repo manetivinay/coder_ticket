@@ -57,14 +57,38 @@ end
 
 Event.all.each do |event|
   event.ticket_types.create(
-      price: rand(100..200) * 1000,
-      name: 'NORMAL',
+      price: rand(50..100) * 1000,
+      name: 'TYPE1',
       max_quantity: 200
   )
 
   event.ticket_types.create(
-      price: rand(200..300) * 1000,
-      name: 'VIP',
+      price: rand(100..150) * 1000,
+      name: 'TYPE2',
+      max_quantity: 200
+  )
+
+  event.ticket_types.create(
+      price: rand(150..200) * 1000,
+      name: 'TYPE3',
+      max_quantity: 200
+  )
+
+  event.ticket_types.create(
+      price: rand(200..250) * 1000,
+      name: 'VIP1',
+      max_quantity: 200
+  )
+
+  event.ticket_types.create(
+      price: rand(250..300) * 1000,
+      name: 'VIP2',
+      max_quantity: 200
+  )
+
+  event.ticket_types.create(
+      price: rand(300..350) * 1000,
+      name: 'VIP3',
       max_quantity: 200
   )
 end

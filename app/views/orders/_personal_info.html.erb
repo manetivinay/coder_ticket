@@ -1,0 +1,15 @@
+<div id="order-error">
+  <%= render 'share/model_error', object: @order if @order %>
+</div>
+
+<div class="input-field">
+  <input id="username" type="text" class="validate" name="order[username]" placeholder="Username">
+</div>
+
+<div class="input-field">
+  <input id="phone" type="text" class="validate" name="order[phone]" placeholder="Phone">
+</div>
+
+<div class="input-field">
+  <input id="email" type="text" class="validate" name="order[email]" placeholder="Email">
+</div>

@@ -1,0 +1,9 @@
+<tr>
+  <td><%= ticket_type.name %></td>
+  <td><%= ticket_type.price_vnd %></td>
+  <td>
+    <input type="hidden" name="ticket_ids[]" value="<%= ticket_type.id %>">
+    <input id="input-<%= ticket_type.id %>" type="number" name="ticket_quantities[]"
+           style="text-align: center; width: 30%" min="0" max="<%= ticket_type.max_quantity %>" value="0">
+  </td>
+</tr>

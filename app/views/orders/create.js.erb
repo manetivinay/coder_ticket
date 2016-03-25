@@ -1,0 +1,5 @@
+<% if @order.persisted? %>
+  location.href = '<%= root_path %>';
+<% else %>
+  $("#order-error").html("<%= j(render 'share/model_error', object: @order) %>");
+<% end %>

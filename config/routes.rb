@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post :search
     end
   end
+  resources :orders, only: [:new, :create]
   resource :sessions, only: [:create, :destroy]
   resources :users, only: [:create, :edit, :update]
 end
