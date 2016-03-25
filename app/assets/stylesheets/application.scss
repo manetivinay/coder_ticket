@@ -24,6 +24,10 @@ input[type=text]:focus:not([readonly]) {
   box-shadow: 0 1px 0 0 #90B63E;
 }
 
+#sold-out {
+  color: #cecece;
+}
+
 .input-field label {
   left: 0;
 }

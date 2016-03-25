@@ -10,10 +10,12 @@
       </div>
 
       <div class="card-action">
-        <b>
-          <%= link_to 'Book Now', new_order_path(event_id: @event.id),
-                      class: 'btn waves-effect waves-light', id: 'btn-book' %>
-        </b>
+        <%= form_tag new_order_path, method: :get do %>
+            <input type="hidden" name="event_id" value="<%= @event.id %>">
+            <button class="btn waves-effect waves-light" id="btn-book" <%= @event.check_out_disable %>>
+              <b><input type="submit" value="<%= @event.check_out_title %>"></b>
+            </button>
+        <% end %>
       </div>
     </div>
   </div>

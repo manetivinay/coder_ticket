@@ -17,7 +17,7 @@
 class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
-  has_many :ticket_types
+  has_many :ticket_types, dependent: :destroy
 
   scope :upcoming, -> { where("start_at > (?)", Time.now) }
   scope :search, lambda { |key_word|

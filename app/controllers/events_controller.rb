@@ -27,7 +27,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @ticket_types = @event.ticket_types.decorate
+    @ticket_types = @event.ticket_types.order('created_at asc').decorate
   end
 
   def new

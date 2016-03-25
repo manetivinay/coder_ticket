@@ -9,4 +9,5 @@ RSpec.describe Order, type: :model do
   it { should_not allow_value('android').for(:email) }
   it { should_not allow_value('ios.@..c').for(:email) }
   it { should allow_value('vuhuyquan@apidez.com').for(:email) }
+  it { should have_many(:ticket_orders).dependent(:destroy) }
 end

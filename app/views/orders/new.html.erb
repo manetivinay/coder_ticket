@@ -1,50 +1,17 @@
 <div class="row" style="margin-top: 32px">
   <%= form_tag orders_path, method: :post, remote: true do %>
       <div class="col m8">
-        <table class="bordered centered striped">
-          <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-          </tr>
-          </thead>
-
-          <tbody>
-          <%= render partial: 'ticket_types/ticket_type_row',
-                     collection: @ticket_types, as: :ticket_type %>
-          </tbody>
-        </table>
+        <%= render 'orders/ticket_chooser' %>
       </div>
 
       <div class="col m4">
         <div class="card">
           <div class="card-content">
-            <table class="bordered centered striped">
-              <thead>
-              <tr>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-              </tr>
-              </thead>
-
-              <tbody id="ticket-body">
-              <tr>
-                <td>Total</td>
-                <td></td>
-                <td>
-                  <input type="hidden" id="total_money" name="order[total_money]" value="0">
-                  <b id="total">0 VND</b>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-
-            <!-- Personal Info -->
+            <div id="order-error">
+              <%= render 'share/error', errors: @errors %>
+            </div>
+            <%= render 'orders/summary' %>
             <%= render 'orders/personal_info' %>
-
-            <!-- Action button -->
             <b>
               <button class="btn waves-effect waves-light" type="submit"
                       name="action" id="btn-book" style="margin-top: 16px">
