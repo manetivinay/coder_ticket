@@ -14,7 +14,5 @@
 #  updated_at  :datetime         not null
 #
 
-require 'rails_helper'
-
-RSpec.describe EventsController, type: :controller do
+FactoryGirl.define do
 end

@@ -54,3 +54,17 @@ images.each do |img|
       venue: Venue.order("RANDOM()").first
   )
 end
+
+Event.all.each do |event|
+  event.ticket_types.create(
+      price: rand(100..200) * 1000,
+      name: 'NORMAL',
+      max_quantity: 200
+  )
+
+  event.ticket_types.create(
+      price: rand(200..300) * 1000,
+      name: 'VIP',
+      max_quantity: 200
+  )
+end

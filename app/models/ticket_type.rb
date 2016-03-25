@@ -13,4 +13,9 @@
 
 class TicketType < ActiveRecord::Base
   belongs_to :event
+  validates_presence_of :event_id
+  validates_presence_of :name
+  validates_numericality_of :max_quantity, only_integer: true
+  validates_numericality_of :price, only_integer: true
+  validates_uniqueness_of :price, scope: :event_id
 end

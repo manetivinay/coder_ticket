@@ -6,10 +6,9 @@
 #  name            :string
 #  email           :string
 #  password_digest :string
+#  avatar          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  description     :text
-#  avatar          :string
 #
 
 class UsersController < ApplicationController

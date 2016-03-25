@@ -15,4 +15,8 @@ require 'rails_helper'
 
 RSpec.describe TicketType, type: :model do
   it { should belong_to(:event) }
+  it { should validate_presence_of(:event_id) }
+  it { should validate_numericality_of(:max_quantity).only_integer }
+  it { should validate_numericality_of(:price).only_integer }
+  it { should validate_uniqueness_of(:price).scoped_to(:event_id) }
 end

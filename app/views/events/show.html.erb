@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col m4">
+    <div class="card">
+      <div class="card-content">
+        <p class="info">
+          <i class="tiny material-icons">library_books</i><span class="text-info">Ticket Type</span>
+        </p>
+        <hr>
+        <%= render @ticket_types %>
+      </div>
+
+      <div class="card-action">
+        <b>
+          <a class="btn waves-effect waves-light" id="btn-book">Book Now</a>
+        </b>
+      </div>
+    </div>
+  </div>
+  <div class="col m8">
+    <div class="card">
+      <div class="card-image">
+        <%= image_tag @event.image %>
+        <span class="card-title"><b><%= @event.name %></b></span>
+      </div>
+      <div class="card-content">
+        <p>
+          <%= @event.description %>
+        </p>
+        <hr>
+        <p class="info">
+          <i class="tiny material-icons">query_builder</i><span class="text-info"><%= @event.start_at %></span>
+        </p>
+        <p class="info">
+          <i class="tiny material-icons">view_module</i><span class="text-info"><%= @event.category.name %></span>
+        </p>
+        <p class="info">
+          <i class="tiny material-icons">location_on</i><span class="text-info"><%= @event.venue.address %></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

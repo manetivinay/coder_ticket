@@ -43,6 +43,18 @@ button:focus {
   background-color: #90B63E;
 }
 
+.btn#btn-book {
+  background-color: #f44336;
+}
+
+.btn:hover#btn-book {
+  background-color: #f44336;
+}
+
+.btn:focus#btn-book {
+  background-color: #f44336;
+}
+
 .create-btn {
   bottom: 128px;
   right: 32px;
@@ -70,6 +82,7 @@ main {
 .container {
   width: 100%;
 }
+
 footer.page-footer .footer-copyright {
   margin-top: 0;
   background-color: #90B63E;
@@ -85,10 +98,25 @@ footer.page-footer {
   background-color: #90B63E;
 }
 
+.info {
+  font-size: 20px;
+}
+
+.text-info {
+  margin-left: 8px;
+}
+
 .background-blur {
-  -webkit-filter: blur(3px);
-  -moz-filter: blur(3px);
-  -o-filter: blur(3px);
-  -ms-filter: blur(3px);
-  filter: blur(3px);
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+#btn-book {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  font-size: 20px;
 }

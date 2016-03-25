@@ -15,8 +15,19 @@
 #
 
 class EventsController < ApplicationController
+  before_action :get_event, only: [:show]
+
   def index
-    @events = Event.upcoming.decorate
+    @events = Event.upcoming.preload(:venue, :category).decorate
+  end
+
+  def search
+    @events = Event.search(params[:key_word]).preload(:venue, :category).decorate
+    render :index
+  end
+
+  def show
+    @ticket_types = @event.ticket_types.decorate
   end
 
   def new
@@ -32,5 +43,14 @@ class EventsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def get_event
+    @event = Event.find(params[:id]).decorate
+    unless @event.upcoming?
+      flash[:alert] = 'This event has passed'
+      redirect_to root_path
+    end
   end
 end
