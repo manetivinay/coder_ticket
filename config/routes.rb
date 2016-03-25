@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'events#index'
   get 'auth/:provider/callback' => 'sessions#callback'
   resources :events
   resource :sessions, only: [:create, :destroy]

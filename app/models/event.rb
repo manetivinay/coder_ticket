@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
   has_many :ticket_types
+  scope :upcoming, -> { where("start_at > (?)", Time.now) }
 
   validates_presence_of :description, :venue, :category, :start_at, :image
   validates_uniqueness_of :name, scope: [:venue_id, :start_at]

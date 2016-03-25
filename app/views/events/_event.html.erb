@@ -1,0 +1,19 @@
+<div class="col m6">
+  <div class="card">
+    <div class="card-image">
+      <%= link_to event do %>
+          <%= image_tag event.image, width: 500, height: 250 %>
+      <% end %>
+      <span class="card-title"><%= event.name %></span>
+    </div>
+    <div class="card-content">
+      <p>
+        <%= event.description %>
+      </p>
+    </div>
+    <div class="card-action">
+      <span><%= event.category.name %></span>
+      <span class="right"><%= event.venue.address %></span>
+    </div>
+  </div>
+</div>

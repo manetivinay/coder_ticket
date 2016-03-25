@@ -18,9 +18,9 @@ The following **required** functionality is complete:
 
 #### Events
 
-* [ ] Users can see a list of upcoming events. Past events should not be shown. **HINT**: Good candidate for a test.
+* [x] Users can see a list of upcoming events. Past events should not be shown. **HINT**: Good candidate for a test.
 * [ ] Users can search for events from the homepage.
-* [ ] Users can click on an event to see details about the event. 
+* [x] Users can click on an event to see details about the event. 
 * [ ] Users can click on "Book Now" to go to a page to purchase tickets.
 
 #### Tickets
@@ -46,20 +46,16 @@ The following **required** functionality is complete:
 ### Optional Stories
 
 * [x] Users can log in with Facebook.
-* [ ] Users receive an email when they have purchased a ticket.
-* [ ] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
+* [v] Users receive an email when they have purchased a ticket.
+* [v] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
+* [v] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
+* [v] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
 * [ ] User A can allow User B to edit User A's event. In other words, an event owner can assign other people to be "event admins". 
 * [ ] Ticket types have an optional "minimum" purchase quantity. ([Example Screenshot](http://i.imgur.com/DOYtAR0.png))
-* [ ] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
-* [ ] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
-
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2016 nongdenchet
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -16,6 +16,7 @@
 
 class EventsController < ApplicationController
   def index
+    @events = Event.upcoming.decorate
   end
 
   def new
