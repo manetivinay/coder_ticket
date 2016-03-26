@@ -10,6 +10,7 @@ require 'ffaker'
 require 'shoulda-matchers'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'support/data_support'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|

@@ -10,11 +10,10 @@
 #  updated_at :datetime         not null
 #
 
-require 'rails_helper'
-
-RSpec.describe Venue, type: :model do
-  it { should belong_to(:region) }
-  it { should validate_uniqueness_of(:name) }
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:region_id) }
+FactoryGirl.define do
+  factory :venue, class: Venue do
+    name 'location'
+    address 'address'
+    region
+  end
 end

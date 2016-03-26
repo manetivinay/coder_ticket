@@ -44,4 +44,24 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  context 'scope' do
+    before(:each) do
+      DataSupport.create_events
+    end
+
+    describe '.upcoming' do
+      it 'should return upcoming events' do
+        upcoming = Event.upcoming.map { |event| event.name }
+        expect(upcoming).to eq %w(abc bbbbb)
+      end
+    end
+
+    describe '.search' do
+      it 'should return upcoming events with search' do
+        search = Event.search('a').map { |event| event.name }
+        expect(search).to eq %w(abc)
+      end
+    end
+  end
 end

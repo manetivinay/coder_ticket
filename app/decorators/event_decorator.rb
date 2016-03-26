@@ -6,7 +6,11 @@ class EventDecorator < Draper::Decorator
   end
 
   def start_at
-    object.start_at.strftime('%d/%m/%Y - %I:%M%p')
+    object.start_at.strftime('%d/%m/%Y')
+  end
+
+  def end_at
+    object.end_at.strftime('%d/%m/%Y')
   end
 
   def check_out_disable

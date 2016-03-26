@@ -1,0 +1,5 @@
+Thank you for your order
+Username: <%= @order.username %>
+Phone: <%= @order.phone %>
+Email: <%= @order.email %>
+Total money: <%= FormatUtils.format_price(@order.total_money) %>

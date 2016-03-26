@@ -1,0 +1,9 @@
+<h3>Thank you for your order</h3>
+<div class="col m4">
+  <div class="card-content">
+    Username: <%= @order.username %> <br>
+    Phone: <%= @order.phone %> <br>
+    Email: <%= @order.email %> <br>
+    Total money: <%= FormatUtils.format_price(@order.total_money) %> <br>
+  </div>
+</div>

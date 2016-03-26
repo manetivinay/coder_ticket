@@ -10,22 +10,23 @@ class CreateOrderService
   end
 
   private
-  def retrieve_data
-    @order = Order.new(order_params)
-    @ticket_types = TicketType.where('id IN (?)', @params[:ticket_ids])
-                        .order('created_at asc')
-  end
-
   def start_transaction
     ActiveRecord::Base.transaction do
       begin
         retrieve_data
         create_order
         create_order_detail
+        send_email
       rescue ActiveRecord::Rollback
         # ignored
       end
     end
+  end
+
+  def retrieve_data
+    @order = Order.new(order_params)
+    @ticket_types = TicketType.where('id IN (?)', @params[:ticket_ids])
+                        .order('created_at asc')
   end
 
   def create_order
@@ -55,6 +56,10 @@ class CreateOrderService
       @errors << "Sorry, there are no more ticket for #{ticket_type.name}, please restart the page"
       raise ActiveRecord::Rollback
     end
+  end
+
+  def send_email
+    OrderMailer.thank_you(@order.email, @order.id).deliver_later
   end
 
   def order_params
