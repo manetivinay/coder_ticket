@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Billet Ami'
+  default from: 'BilletAmi'
   layout 'mailer'
 end
