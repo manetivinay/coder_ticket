@@ -25,6 +25,9 @@ RSpec.describe Event, type: :model do
     it { should belong_to(:user) }
     it { should respond_to(:is_hot) }
     it { should respond_to(:is_published) }
+    it { should respond_to(:local_image) }
+    it { should respond_to(:local_image_url) }
+    it { should respond_to(:remote_local_image_url) }
     it { should validate_presence_of(:venue) }
     it { should validate_presence_of(:category) }
     it { should validate_presence_of(:start_at) }

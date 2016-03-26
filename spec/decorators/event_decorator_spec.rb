@@ -11,11 +11,11 @@ describe EventDecorator do
 
   context 'format' do
     it 'should format start time' do
-      expect(@event.start_at).to eq('20/07/2016')
+      expect(@event.start_at).to eq('20 July, 2016')
     end
 
     it 'should format end time' do
-      expect(@event.end_at).to eq('20/08/2016')
+      expect(@event.end_at).to eq('20 August, 2016')
     end
 
     it 'should return short description' do

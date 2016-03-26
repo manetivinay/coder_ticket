@@ -6,11 +6,31 @@ class EventDecorator < Draper::Decorator
   end
 
   def start_at
-    object.start_at.strftime('%d/%m/%Y')
+    FormatUtils.date_to_string(object.start_at)
+  end
+
+  def venue_name
+    object.venue ? object.venue.name : ''
+  end
+
+  def checked
+    object.is_hot ? 'checked' : ''
+  end
+
+  def selected_region(region_id)
+    'selected' if object.venue && object.venue.region_id == region_id
+  end
+
+  def selected_category(category_id)
+    'selected' if object.category_id == category_id
+  end
+
+  def image
+    object.local_image_url ? object.local_image_url : object.image
   end
 
   def end_at
-    object.end_at.strftime('%d/%m/%Y')
+    FormatUtils.date_to_string(object.end_at)
   end
 
   def check_out_disable

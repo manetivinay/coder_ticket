@@ -1,0 +1,37 @@
+<div class="row" style="margin-top: 16px">
+  <div class="col m8 offset-m2">
+    <h3 style="margin-bottom: 32px">Edit Profile</h3>
+    <%= render 'share/model_error', object: @user %>
+
+    <%= form_for @user, method: :put, class: 'input-form', html: {multipart: true} do |_| %>
+        <div class="input-field">
+          <input id="name" name="user[name]" type="text" value="<%= @user.name %>">
+          <label for="name" id="label-input">Username</label>
+        </div>
+
+        <div class="input-field">
+          <input id="password" name="user[password]" type="password">
+          <label for="password" id="label-input">Password</label>
+        </div>
+
+        <div class="input-field">
+          <input id="password_confirmation" name="user[password_confirmation]" type="password">
+          <label for="password_confirmation" id="label-input">Confirmation</label>
+        </div>
+
+        <div class="file-field input-field">
+          <div class="btn waves-effect waves-light">
+            <span>Avatar</span>
+            <input type="file" name="user[avatar]">
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+
+        <button class="btn waves-effect waves-light" style="height: 3rem" type="submit" name="action">
+          Submit
+        </button>
+    <% end %>
+  </div>
+</div>

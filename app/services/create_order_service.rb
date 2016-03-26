@@ -17,6 +17,8 @@ class CreateOrderService
         create_order
         create_order_detail
         send_email
+      rescue ActiveRecord::RecordNotFound
+        @errors << 'Some of the ticket is not available'
       rescue ActiveRecord::Rollback
         # ignored
       end

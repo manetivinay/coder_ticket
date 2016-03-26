@@ -18,6 +18,7 @@
 
 class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy, :mine]
+  before_action :get_extra, only: [:new, :edit]
   before_action :get_event, only: [:show, :edit, :update]
   before_action :check_owner, only: [:edit, :update]
 
@@ -31,7 +32,12 @@ class EventsController < ApplicationController
   end
 
   def show
-    @ticket_types = @event.ticket_types.order('created_at asc').decorate
+    if @event.upcoming?
+      @ticket_types = @event.ticket_types.order('created_at asc').decorate
+    else
+      flash[:alert] = 'This event has passed'
+      redirect_to root_path
+    end
   end
 
   def mine
@@ -39,16 +45,30 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.new.decorate
   end
 
   def create
+    result = CreateEventService.new(params).create
+    @errors, @event = result[:errors], result[:event]
+    if @errors.empty?
+      redirect_to edit_event_path(@event)
+    else
+      render :new
+    end
   end
 
   def edit
   end
 
   def update
+    result = UpdateEventService.new(params).create
+    @errors, @event = result[:errors], result[:event]
+    if @errors.empty?
+      redirect_to edit_event_path(@event)
+    else
+      render :new
+    end
   end
 
   private
@@ -61,9 +81,10 @@ class EventsController < ApplicationController
 
   def get_event
     @event = Event.find(params[:id]).decorate
-    unless @event.upcoming?
-      flash[:alert] = 'This event has passed'
-      redirect_to root_path
-    end
+  end
+
+  def get_extra
+    @categories = Category.all
+    @regions = Region.all
   end
 end
