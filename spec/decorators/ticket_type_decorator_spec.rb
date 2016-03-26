@@ -47,4 +47,32 @@ describe TicketTypeDecorator do
       expect(ticket_type.css_class).to eq('sold-out')
     end
   end
+
+  describe '#available_quantity' do
+    it 'should return right available value' do
+      ticket_type.object.max_quantity = 10
+      ticket_type.object.minimum_quantity = 5
+      expect(ticket_type.available_quantity).to eq([0, 5, 6, 7, 8, 9, 10])
+    end
+
+    it 'should return right available value' do
+      ticket_type.object.max_quantity = 4
+      ticket_type.object.minimum_quantity = 5
+      expect(ticket_type.available_quantity).to eq([0, 1, 2, 3, 4])
+    end
+  end
+
+  describe '#min_quantity' do
+    it 'should return right css_class' do
+      ticket_type.object.max_quantity = 1
+      ticket_type.object.minimum_quantity = 2
+      expect(ticket_type.min_quantity).to eq(0)
+    end
+
+    it 'should return sold out css_class' do
+      ticket_type.object.max_quantity = 10
+      ticket_type.object.minimum_quantity = 2
+      expect(ticket_type.min_quantity).to eq(2)
+    end
+  end
 end

@@ -2,16 +2,18 @@
 #
 # Table name: events
 #
-#  id          :integer          not null, primary key
-#  start_at    :datetime
-#  end_at      :datetime
-#  venue_id    :integer
-#  image       :string
-#  description :text
-#  category_id :integer
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  start_at     :datetime
+#  end_at       :datetime
+#  venue_id     :integer
+#  image        :string
+#  description  :text
+#  category_id  :integer
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  is_hot       :boolean          default(FALSE)
+#  is_published :boolean          default(FALSE)
 #
 
 require 'rails_helper'
@@ -27,6 +29,8 @@ RSpec.describe Event, type: :model do
     it { should validate_presence_of(:image) }
     it { should validate_presence_of(:description) }
     it { should validate_uniqueness_of(:name).scoped_to([:venue_id, :start_at]) }
+    it { should respond_to(:is_hot) }
+    it { should respond_to(:is_published) }
   end
 
   context 'instance methods' do

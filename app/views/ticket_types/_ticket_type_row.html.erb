@@ -1,9 +1,14 @@
 <tr id="<%= ticket_type.css_class %>">
   <td><%= ticket_type.name %></td>
   <td><%= ticket_type.price_vnd %></td>
-  <td>
+  <td style="width: 40%">
     <input type="hidden" name="ticket_ids[]" value="<%= ticket_type.id %>">
-    <input id="input-<%= ticket_type.id %>" type="number" name="ticket_quantities[]"
-           style="text-align: center; width: 30%" min="0" max="<%= ticket_type.max_quantity %>" value="0">
+    <div class="input-field col m4 offset-m4">
+      <select id="input-<%= ticket_type.id %>" name="ticket_quantities[]" style="text-align: center">
+        <% ticket_type.available_quantity.each do |value| %>
+            <option value="<%= value %>"><%= value %></option>
+        <% end %>
+      </select>
+    </div>
   </td>
 </tr>

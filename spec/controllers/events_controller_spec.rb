@@ -2,16 +2,18 @@
 #
 # Table name: events
 #
-#  id          :integer          not null, primary key
-#  start_at    :datetime
-#  end_at      :datetime
-#  venue_id    :integer
-#  image       :string
-#  description :text
-#  category_id :integer
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  start_at     :datetime
+#  end_at       :datetime
+#  venue_id     :integer
+#  image        :string
+#  description  :text
+#  category_id  :integer
+#  name         :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  is_hot       :boolean          default(FALSE)
+#  is_published :boolean          default(FALSE)
 #
 
 require 'rails_helper'

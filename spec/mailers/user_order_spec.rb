@@ -15,7 +15,7 @@ RSpec.describe OrderMailer, type: :mailer do
     end
 
     it "should have appropriate sender" do
-      expect(@mail.from).to include('Billet Ami')
+      expect(@mail.from).to include('BilletAmi')
     end
 
     it "should have appropriate receiver" do

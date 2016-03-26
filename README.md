@@ -47,11 +47,16 @@ The following **required** functionality is complete:
 
 * [x] Users can log in with Facebook.
 * [x] Users receive an email when they have purchased a ticket.
-* [v] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
+* [x] Ticket types have an optional "minimum" purchase quantity. ([Example Screenshot](http://i.imgur.com/DOYtAR0.png))
 * [v] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
 * [v] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
 * [ ] User A can allow User B to edit User A's event. In other words, an event owner can assign other people to be "event admins". 
-* [ ] Ticket types have an optional "minimum" purchase quantity. ([Example Screenshot](http://i.imgur.com/DOYtAR0.png))
+* [ ] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
+
+### Additional Stories
+* [x] Users can order many ticket_type at a time
+* [x] Material Design
+* [x] User can edit profile
 
 ## License
 
