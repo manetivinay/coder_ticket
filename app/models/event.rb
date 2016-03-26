@@ -32,9 +32,4 @@ class Event < ActiveRecord::Base
   def upcoming?
     start_at > Time.now
   end
-
-  def format_date
-    self.start_at = FormatUtils.string_to_date(self.start_at)
-    self.end_at = FormatUtils.string_to_date(self.end_at)
-  end
 end
