@@ -1,2 +1,119 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<div class="row">
+  <div class="col m8 offset-m2">
+    <h3>New Event</h3>
+
+    <%= form_for @event, method: :post do |_| %>
+        <div class="col m6" style="padding-left: 0">
+
+          <!-- Category -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Category</span>
+
+              <select name="event[category]">
+                <option name="1" value="1">1</option>
+                <option name="1" value="1">1</option>
+                <option name="1" value="1">1</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Venue -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Venue</span>
+
+              <div class="input-field">
+                <input id="venue" name="venue[name]" type="text" value="">
+                <label for="venue" id="label-input">Name</label>
+              </div>
+
+              <select name="venue[region]">
+                <option name="1" value="1">1</option>
+                <option name="1" value="1">1</option>
+                <option name="1" value="1">1</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="col m6">
+
+          <!-- Event -->
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Event</span>
+
+              <div class="input-field">
+                <input id="name" name="event[name]" type="text" value="">
+                <label for="name" id="label-input">Name</label>
+              </div>
+
+              <div class="input-field">
+                <input id="description" name="event[description]" type="text" value="">
+                <label for="description" id="label-input">Description</label>
+              </div>
+
+              <div class="row">
+                <div class="col m6" style="padding-left: 0">
+                  <div class="input-field">
+                    <input type="date" class="datepicker" name="event[start_at]" placeholder="Start date">
+                  </div>
+                </div>
+
+                <div class="col m6">
+                  <div class="input-field">
+                    <input type="date" class="datepicker" name="event[end_at]" placeholder="End date">
+                  </div>
+                </div>
+              </div>
+
+              <p style="margin-bottom: 28px">
+                <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" name="event[is_hot]"/>
+                <label for="filled-in-box">IS HOT</label>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticket Type -->
+        <div class="col m12" style="padding-left: 0">
+          <div class="card">
+            <div class="card-content">
+              <div id="ticket-container">
+
+              </div>
+              <a class="white-text btn waves-effect waves-light modal-trigger" href="#ticket-modal">
+                Add Ticket Type
+              </a>
+              <%= render 'ticket_types/new' %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button -->
+        <button class="btn waves-effect waves-light" id="btn-book">
+          <b>Create</b>
+        </button>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  Number.prototype.format = function (n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.') + " VND";
+  };
+
+  $('#ticket-btn').click(function() {
+    var price = parseInt($('#price').val() || 100000).format();
+    var name = $('#ticket-name').val() || "VIP";
+    var min = parseInt($('#minimum_quantity').val() || 1);
+    var max = parseInt($('#max_quantity').val() || 20);
+    $('#ticket-container').prepend(
+        "<div class='chip' style='margin-bottom: 8px; margin-right: 4px'>"
+        + name + " - " + price
+        + "<i class='material-icons'>close</i><br></div>"
+    )
+  });
+</script>

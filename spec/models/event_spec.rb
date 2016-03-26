@@ -22,15 +22,17 @@ RSpec.describe Event, type: :model do
   context 'attributes' do
     it { should belong_to(:venue) }
     it { should belong_to(:category) }
-    it { should have_many(:ticket_types).dependent(:destroy) }
+    it { should belong_to(:user) }
+    it { should respond_to(:is_hot) }
+    it { should respond_to(:is_published) }
     it { should validate_presence_of(:venue) }
     it { should validate_presence_of(:category) }
     it { should validate_presence_of(:start_at) }
     it { should validate_presence_of(:image) }
     it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:user_id) }
+    it { should have_many(:ticket_types).dependent(:destroy) }
     it { should validate_uniqueness_of(:name).scoped_to([:venue_id, :start_at]) }
-    it { should respond_to(:is_hot) }
-    it { should respond_to(:is_published) }
   end
 
   context 'instance methods' do

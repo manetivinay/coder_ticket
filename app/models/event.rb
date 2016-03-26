@@ -19,14 +19,13 @@
 class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
+  belongs_to :user
   has_many :ticket_types, dependent: :destroy
 
-  scope :upcoming, -> { where("start_at > (?)", Time.now) }
-  scope :search, lambda { |key_word|
-    upcoming.where("LOWER(name) LIKE ?", "%#{key_word.downcase}%")
-  }
+  scope :upcoming, -> { where("start_at > (?) AND is_published = (?)", Time.now, true).order('created_at asc') }
+  scope :search, lambda { |key_word| upcoming.where("LOWER(name) LIKE ?", "%#{key_word.downcase}%") }
 
-  validates_presence_of :description, :venue, :category, :start_at, :image
+  validates_presence_of :description, :venue, :category, :start_at, :image, :user_id
   validates_uniqueness_of :name, scope: [:venue_id, :start_at]
 
   def upcoming?

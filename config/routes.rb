@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root 'events#index'
   get 'auth/:provider/callback' => 'sessions#callback'
-  resources :events do
+  resources :events, except: [:destroy] do
     collection do
       post :search
+      get :mine
     end
   end
   resources :orders, only: [:new, :create]

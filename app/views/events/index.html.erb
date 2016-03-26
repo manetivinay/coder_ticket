@@ -1,6 +1,6 @@
 <%= render 'share/search' %>
 <div class="row">
   <div class="col m10 offset-m1">
-    <%= render @events %>
+    <%= render partial: 'event', collection: @events, locals: {is_edit: false} %>
   </div>
 </div>

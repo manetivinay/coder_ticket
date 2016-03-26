@@ -1,7 +1,7 @@
 <div class="col m6">
   <div class="card">
     <div class="card-image">
-      <%= link_to event do %>
+      <%= link_to event_link(event, is_edit) do %>
           <%= image_tag event.image, width: 500, height: 250, class: 'background-blur' %>
       <% end %>
       <span class="card-title"><b><%= event.name %></b></span>

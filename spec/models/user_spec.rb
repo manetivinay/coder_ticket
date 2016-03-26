@@ -27,4 +27,5 @@ RSpec.describe User, type: :model do
   it { should respond_to(:avatar) }
   it { should respond_to(:avatar_url) }
   it { should respond_to(:remote_avatar_url) }
+  it { should have_many(:events) }
 end

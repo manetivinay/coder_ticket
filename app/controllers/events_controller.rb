@@ -17,7 +17,9 @@
 #
 
 class EventsController < ApplicationController
-  before_action :get_event, only: [:show]
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy, :mine]
+  before_action :get_event, only: [:show, :edit, :update]
+  before_action :check_owner, only: [:edit, :update]
 
   def index
     @events = Event.upcoming.preload(:venue, :category).decorate
@@ -32,7 +34,12 @@ class EventsController < ApplicationController
     @ticket_types = @event.ticket_types.order('created_at asc').decorate
   end
 
+  def mine
+    @events = current_user.events.order('created_at asc').preload(:venue, :category).decorate
+  end
+
   def new
+    @event = Event.new
   end
 
   def create
@@ -44,10 +51,14 @@ class EventsController < ApplicationController
   def update
   end
 
-  def destroy
+  private
+  def check_owner
+    if current_user != @event.user
+      flash[:alert] = 'You have no permission'
+      redirect_to root_path
+    end
   end
 
-  private
   def get_event
     @event = Event.find(params[:id]).decorate
     unless @event.upcoming?

@@ -23,6 +23,14 @@ regions.each do |name|
   Region.create(name: name)
 end
 
+# User
+user = User.create(
+    name: 'nongdenchet',
+    email: 'nongdenchet@gmail.com',
+    password: 'androidDeveloper',
+    password_confirmation: 'androidDeveloper'
+)
+
 # Venue
 20.times do
   Venue.create(
@@ -39,8 +47,10 @@ images.each do |img|
       description: FFaker::Lorem.paragraph(10),
       name: FFaker::Name.name,
       image: img,
+      user: user,
       category: Category.order("RANDOM()").first,
-      venue: Venue.order("RANDOM()").first
+      venue: Venue.order("RANDOM()").first,
+      is_published: true
   )
 
   # Past events
@@ -50,8 +60,10 @@ images.each do |img|
       description: FFaker::Lorem.paragraph(10),
       name: FFaker::Name.name,
       image: img,
+      user: user,
       category: Category.order("RANDOM()").first,
-      venue: Venue.order("RANDOM()").first
+      venue: Venue.order("RANDOM()").first,
+      is_published: true
   )
 end
 

@@ -23,6 +23,7 @@ FactoryGirl.define do
     image 'link'
     description 'desc'
     name 'abc'
+    is_published true
   end
 
   factory :event2, class: Event do
@@ -31,6 +32,7 @@ FactoryGirl.define do
     image 'link'
     description 'desc'
     name 'aba'
+    is_published true
   end
 
   factory :event3, class: Event do
@@ -39,5 +41,6 @@ FactoryGirl.define do
     image 'link'
     description 'desc'
     name 'bbbbb'
+    is_published true
   end
 end

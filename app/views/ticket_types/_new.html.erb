@@ -1,0 +1,36 @@
+<div id="ticket-modal" class="modal" style="height: 52%">
+  <div class="modal-content">
+    <div class="row">
+      <h4>New Ticket</h4>
+      <div class="input-field">
+        <input id="ticket-name" name="ticket-name" type="text" value="" placeholder="Default is VIP">
+        <label for="ticket-name" id="label-input">Name</label>
+      </div>
+
+      <div class="input-field">
+        <input id="price" name="price" type="number" value="" placeholder="Default is 100.000 VND">
+        <label for="price" id="label-input">Price</label>
+      </div>
+
+      <div class="row">
+        <div class="col m6" style="padding-left: 0">
+          <div class="input-field">
+            <input id="max_quantity" name="max_quantity" type="number" value="" placeholder="Default is 20">
+            <label for="max_quantity" id="label-input">Max</label>
+          </div>
+        </div>
+
+        <div class="col m6">
+          <div class="input-field">
+            <input id="minimum_quantity" name="minimum_quantity" type="number" value="" placeholder="Default is 1">
+            <label for="minimum_quantity" id="label-input">Min</label>
+          </div>
+        </div>
+      </div>
+
+      <a class="btn waves-effect waves-light modal-action modal-close" id="ticket-btn">
+        Create
+      </a>
+    </div>
+  </div>
+</div>

@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     store_path(path)
     unless current_user
       flash[:alert] = 'Please login to your account'
-      redirect_to root_path
+      redirect_to :back
     end
   end
 end
