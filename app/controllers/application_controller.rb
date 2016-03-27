@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def require_login(path = nil)
     store_path(path)
-    unless current_user
+    unless sign_in?
       flash[:alert] = 'Please login to your account'
       redirect_to :back
     end

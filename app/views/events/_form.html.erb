@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col m8 offset-m2">
     <h3><%= title %></h3>
-    <%= render 'share/error', errors: @errors %>
-    <%= form_for @event, method: :post do |_| %>
+    <div id="event-error">
+      <%= render 'share/error', errors: @errors %>
+    </div>
+    <%= form_for @event, remote: true, multipart: true, authenticity_token: true do |f| %>
         <div class="col m6" style="padding-left: 0">
 
           <!-- Category -->
@@ -20,7 +22,7 @@
 
           <!-- Venue -->
           <div class="card">
-            <div class="card-content" style="padding-bottom: 70px">
+            <div class="card-content">
               <span class="card-title">Venue</span>
 
               <div class="input-field">
@@ -28,18 +30,25 @@
                 <label for="venue" id="label-input">Name</label>
               </div>
 
-              <select name="venue[region_id]">
-                <% @regions.each do |region| %>
-                    <option value="<%= region.id %>" <%= @event.selected_region(region.id) %>><%= region.name %></option>
-                <% end %>
-              </select>
+              <div class="input-field">
+                <input id="address" name="venue[address]" type="text" value="<%= @event.venue_address %>">
+                <label for="address" id="label-input">Address</label>
+              </div>
+
+              <div class="input-field">
+                <select name="venue[region_id]">
+                  <% @regions.each do |region| %>
+                      <option value="<%= region.id %>" <%= @event.selected_region(region.id) %>><%= region.name %></option>
+                  <% end %>
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Event -->
         <div class="col m6">
-          <div class="card">
+          <div class="card" style="padding-bottom: 43px">
             <div class="card-content">
               <span class="card-title">Event</span>
 
@@ -68,17 +77,17 @@
               </div>
 
               <p>
-                <input type="checkbox" class="filled-in" id="filled-in-box" checked="<%= @event.checked %>" name="event[is_hot]"/>
+                <%= f.check_box :is_hot, class: 'filled-in', id: 'filled-in-box' %>
                 <label for="filled-in-box">IS HOT</label>
               </p>
 
               <div class="file-field input-field">
                 <div class="btn">
                   <span>Image</span>
-                  <input type="file">
+                  <input type="file" name="event[local_image]">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" name="event[image]">
+                  <input id="image-file" class="file-path validate" type="text">
                 </div>
               </div>
             </div>
@@ -87,47 +96,13 @@
 
         <!-- Ticket Type -->
         <div class="col m12" style="padding-left: 0">
-          <div class="card">
-            <div class="card-content">
-              <div id="ticket-container">
-
-              </div>
-              <a class="white-text btn waves-effect waves-light modal-trigger" href="#ticket-modal">
-                Add Ticket Type
-              </a>
-              <%= render 'ticket_types/new' %>
-            </div>
-          </div>
+          <%= render 'ticket_types/form' %>
         </div>
 
         <!-- Button -->
         <button class="btn waves-effect waves-light" id="btn-book">
-          <b>Create</b>
+          <b><%= btn_title %></b>
         </button>
     <% end %>
   </div>
 </div>
-
-<script>
-  Number.prototype.format = function (n, x) {
-    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
-    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.') + " VND";
-  };
-
-  $('#ticket-btn').click(function () {
-    var price = parseInt($('#price').val() || 100000);
-    var name = $('#ticket-name').val() || "VIP";
-    var min = parseInt($('#minimum_quantity').val() || 1);
-    var max = parseInt($('#max_quantity').val() || 20);
-    $('#ticket-container').prepend(
-        "<div class='chip' style='margin-bottom: 8px; margin-right: 4px'>"
-        + name + " - " + price.format()
-        + "<i class='material-icons'>close</i><br>"
-        + "<input type='hidden' name='ticket_types[][max_quantity]' value='" + max + "'>"
-        + "<input type='hidden' name='ticket_types[][minimum_quantity]' value='" + min + "'>"
-        + "<input type='hidden' name='ticket_types[][price]' value='" + price + "'>"
-        + "<input type='hidden' name='ticket_types[][name]' value='" + name + "'>"
-        + "</div>"
-    )
-  });
-</script>

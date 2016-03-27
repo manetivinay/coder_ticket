@@ -4,7 +4,7 @@
 
 Submitted by: **Vũ Huy Quân**
 
-Time spent: **X** hours
+Time spent: **24** hours
 
 URL: **https://billetami.herokuapp.com/**
 
@@ -14,7 +14,7 @@ SimpleCov Test Coverage: [![Coverage Status](https://coveralls.io/repos/github/n
 
 The following **required** functionality is complete:
 
-* [ ] 10 model tests, 2 route tests, 2 controller tests, 2 view tests.
+* [x] 10 model tests, 2 route tests, 2 controller tests, 2 view tests.
 
 #### Events
 
@@ -35,21 +35,21 @@ The following **required** functionality is complete:
 
 * [x] User can sign up by providing their email, password, and name. 
 * [x] User can login using an email and password. 
-* [ ] Users can create events. 
-* [ ] Users must click "publish event" before an event becomes viewable to other users. 
-* [ ] Users can create ticket types for that event. 
-* [ ] Users can create venues.
-* [ ] An event must have at least one `ticket_type` defined before it can be published. 
+* [x] Users can create events. 
+* [x] Users must click "publish event" before an event becomes viewable to other users. 
+* [x] Users can create ticket types for that event. 
+* [x] Users can create venues.
+* [x] An event must have at least one `ticket_type` defined before it can be published. 
 * [x] User can see a list of events he or she has created.
-* [ ] Users can edit their event after creation. But only the user who created the event can edit the event. 
+* [x] Users can edit their event after creation. But only the user who created the event can edit the event. 
 
 ### Optional Stories
 
 * [x] Users can log in with Facebook.
 * [x] Users receive an email when they have purchased a ticket.
 * [x] Ticket types have an optional "minimum" purchase quantity. ([Example Screenshot](http://i.imgur.com/DOYtAR0.png))
-* [v] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
-* [v] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
+* [x] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
+* [x] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
 * [ ] User A can allow User B to edit User A's event. In other words, an event owner can assign other people to be "event admins". 
 * [ ] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
 
@@ -57,6 +57,9 @@ The following **required** functionality is complete:
 * [x] Users can order many ticket_type at a time
 * [x] Material Design
 * [x] User can edit profile
+
+### Issues
+* Dont know how to retrieve carrierwave image for edit form
 
 ## License
 

@@ -1,9 +1,4 @@
-class CreateOrderService
-  def initialize(params)
-    @params = params
-    @errors = []
-  end
-
+class CreateOrderService < BaseService
   def create
     start_transaction
     @errors
@@ -12,30 +7,21 @@ class CreateOrderService
   private
   def start_transaction
     ActiveRecord::Base.transaction do
-      begin
-        retrieve_data
-        create_order
-        create_order_detail
-        send_email
-      rescue ActiveRecord::RecordNotFound
-        @errors << 'Some of the ticket is not available'
-      rescue ActiveRecord::Rollback
-        # ignored
-      end
+      prepare_data
+      create_order
+      create_order_detail
+      send_email
     end
   end
 
-  def retrieve_data
-    @order = Order.new(order_params)
+  def prepare_data
     @ticket_types = TicketType.where('id IN (?)', @params[:ticket_ids])
                         .order('created_at asc')
   end
 
   def create_order
-    unless @order.save
-      @errors += @order.errors.full_messages
-      raise ActiveRecord::Rollback
-    end
+    @order = Order.new(order_params)
+    save_in_transaction(@order)
   end
 
   def create_order_detail

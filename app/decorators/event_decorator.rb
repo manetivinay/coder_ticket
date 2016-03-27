@@ -2,7 +2,7 @@ class EventDecorator < Draper::Decorator
   delegate_all
 
   def short_description
-    object.description.truncate(200, omission: '...')
+    object.description.truncate(160, omission: '...')
   end
 
   def start_at
@@ -11,6 +11,19 @@ class EventDecorator < Draper::Decorator
 
   def venue_name
     object.venue ? object.venue.name : ''
+  end
+
+  def venue_address
+    object.venue ? object.venue.address : ''
+  end
+
+  def image
+    object.local_image_url ? object.local_image_url : object.image
+  end
+
+  def fullname
+    prefix = object.is_hot ? 'HOT: ' : ''
+    prefix + object.name
   end
 
   def checked
@@ -23,10 +36,6 @@ class EventDecorator < Draper::Decorator
 
   def selected_category(category_id)
     'selected' if object.category_id == category_id
-  end
-
-  def image
-    object.local_image_url ? object.local_image_url : object.image
   end
 
   def end_at

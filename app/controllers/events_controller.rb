@@ -14,13 +14,15 @@
 #  updated_at   :datetime         not null
 #  is_hot       :boolean          default(FALSE)
 #  is_published :boolean          default(FALSE)
+#  user_id      :integer
+#  local_image  :string
 #
 
 class EventsController < ApplicationController
   before_action :require_login, only: [:new, :create, :edit, :update, :destroy, :mine]
-  before_action :get_extra, only: [:new, :edit]
-  before_action :get_event, only: [:show, :edit, :update]
+  before_action :get_event, only: [:show, :edit, :update, :publish]
   before_action :check_owner, only: [:edit, :update]
+  before_action :get_extra, only: [:new, :edit]
 
   def index
     @events = Event.upcoming.preload(:venue, :category).decorate
@@ -33,6 +35,7 @@ class EventsController < ApplicationController
 
   def show
     if @event.upcoming?
+      @related_events = @event.related.decorate
       @ticket_types = @event.ticket_types.order('created_at asc').decorate
     else
       flash[:alert] = 'This event has passed'
@@ -40,8 +43,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def publish
+    @event.update_attributes(is_published: true)
+    flash[:notice] = 'Event has been published'
+    redirect_to @event
+  end
+
   def mine
-    @events = current_user.events.order('created_at asc').preload(:venue, :category).decorate
+    @events = current_user.events.order('created_at desc')
+                  .preload(:venue, :category).decorate
   end
 
   def new
@@ -49,26 +59,19 @@ class EventsController < ApplicationController
   end
 
   def create
-    result = CreateEventService.new(params).create
+    result = CreateEventService.new(params, current_user).execute
     @errors, @event = result[:errors], result[:event]
-    if @errors.empty?
-      redirect_to edit_event_path(@event)
-    else
-      render :new
-    end
+    respond_to :js
   end
 
   def edit
+    @ticket_types = @event.ticket_types.order('created_at asc').decorate
   end
 
   def update
-    result = UpdateEventService.new(params).create
+    result = UpdateEventService.new(params, current_user).execute
     @errors, @event = result[:errors], result[:event]
-    if @errors.empty?
-      redirect_to edit_event_path(@event)
-    else
-      render :new
-    end
+    respond_to :js
   end
 
   private

@@ -51,6 +51,8 @@ gem 'mini_magick'
 # omniauth
 gem 'omniauth'
 gem 'omniauth-facebook', '~> 3.0.0'
+# remotipart
+gem 'remotipart', '~> 1.2'
 
 group :test do
   # Testing framework go here

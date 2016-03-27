@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       post :search
       get :mine
     end
+
+    member do
+      get :publish
+    end
   end
   resources :orders, only: [:new, :create]
   resource :sessions, only: [:create, :destroy]

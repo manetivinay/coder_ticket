@@ -1,0 +1,6 @@
+<% if @errors.empty? %>
+  Materialize.toast("Event updated", 1500, 'notice');
+  location.href = '<%= @event.is_published ? event_path(@event) : edit_event_path(@event) %>';
+<% else %>
+  $("#event-error").html("<%= j(render 'share/error', errors: @errors) %>");
+<% end %>

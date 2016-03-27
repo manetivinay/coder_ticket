@@ -1,11 +1,15 @@
-<div class="col m6">
+<div class="col m6" style="padding-left: 0">
   <div class="card">
     <div class="card-image">
       <%= link_to event_link(event, is_edit) do %>
           <%= image_tag event.image, width: 500, height: 250, class: 'background-blur' %>
       <% end %>
-      <span class="card-title"><b><%= event.name %></b></span>
+      <span class="card-title"><b><%= event.fullname %></b></span>
     </div>
+    <% if event.is_hot %>
+        <img src="http://www.clker.com/cliparts/k/J/b/A/C/T/hot-button-hi.png"
+             width="64" height="64" style="position: absolute; left: 16px; top: 16px;">
+    <% end %>
     <div class="card-content">
       <p>
         <%= event.short_description %>

@@ -1,0 +1,7 @@
+<% if @errors.empty? %>
+  Materialize.toast("Event created", 1500, 'notice');
+  location.href = '<%= edit_event_path(@event) %>';
+<% else %>
+  $("#event-error").html("<%= j(render 'share/error', errors: @errors) %>");
+  $("#image-file").val("");
+<% end %>

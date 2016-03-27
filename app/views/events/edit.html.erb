@@ -1,1 +1,10 @@
-<%= render 'events/form', title: 'Edit Event' %>
+<%= render 'events/form', title: 'Edit Event', btn_title: 'Update' %>
+<% unless @event.is_published %>
+    <div class="row">
+      <div class="col m8 offset-m2">
+        <%= link_to publish_event_path(@event), class: 'btn waves-effect waves-light', id: 'btn-book' do %>
+            <b>Publish this event</b>
+        <% end %>
+      </div>
+    </div>
+<% end %>

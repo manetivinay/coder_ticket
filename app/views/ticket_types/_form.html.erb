@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-content">
+    <div id="ticket-container">
+      <% if @ticket_types %>
+          <% @ticket_types.each do |type| %>
+              <div class="chip" style="margin-bottom: 8px; margin-right: 4px"> 
+                <%= type.name %> - <%= type.price_vnd %>
+                <i class="material-icons">close</i><br> 
+                <input type="hidden" name="ticket_types[][max_quantity]" value="<%= type.object.max_quantity %>">
+                 <input type="hidden" name="ticket_types[][minimum_quantity]" value="<%= type.object.minimum_quantity %>"> 
+                <input type="hidden" name="ticket_types[][price]" value="<%= type.object.price %>"> 
+                <input type="hidden" name="ticket_types[][name]" value="<%= type.object.name %>"> 
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+    <a class="white-text btn waves-effect waves-light modal-trigger" href="#ticket-modal">
+      Add Ticket Type
+    </a>
+    <%= render 'ticket_types/new' %>
+  </div>
+</div>
+
+<script>
+  Number.prototype.format = function (n, x) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+    return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.') + " VND";
+  };
+
+  $('#ticket-btn').click(function () {
+    var price = parseInt($('#price').val() || 100000);
+    var name = $('#ticket-name').val() || "VIP";
+    var min = parseInt($('#minimum_quantity').val() || 1);
+    var max = parseInt($('#max_quantity').val() || 20);
+    $('#ticket-container').prepend(
+        "<div class='chip' style='margin-bottom: 8px; margin-right: 4px'>"
+        + name + " - " + price.format()
+        + "<i class='material-icons'>close</i><br>"
+        + "<input type='hidden' name='ticket_types[][max_quantity]' value='" + max + "'>"
+        + "<input type='hidden' name='ticket_types[][minimum_quantity]' value='" + min + "'>"
+        + "<input type='hidden' name='ticket_types[][price]' value='" + price + "'>"
+        + "<input type='hidden' name='ticket_types[][name]' value='" + name + "'>"
+        + "</div>"
+    )
+  });
+</script>

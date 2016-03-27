@@ -14,6 +14,8 @@
 #  updated_at   :datetime         not null
 #  is_hot       :boolean          default(FALSE)
 #  is_published :boolean          default(FALSE)
+#  user_id      :integer
+#  local_image  :string
 #
 
 FactoryGirl.define do

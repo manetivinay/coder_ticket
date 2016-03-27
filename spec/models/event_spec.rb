@@ -14,6 +14,8 @@
 #  updated_at   :datetime         not null
 #  is_hot       :boolean          default(FALSE)
 #  is_published :boolean          default(FALSE)
+#  user_id      :integer
+#  local_image  :string
 #
 
 require 'rails_helper'
@@ -28,12 +30,14 @@ RSpec.describe Event, type: :model do
     it { should respond_to(:local_image) }
     it { should respond_to(:local_image_url) }
     it { should respond_to(:remote_local_image_url) }
-    it { should validate_presence_of(:venue) }
-    it { should validate_presence_of(:category) }
     it { should validate_presence_of(:start_at) }
-    it { should validate_presence_of(:image) }
+    it { should validate_presence_of(:end_at) }
+    it { should validate_presence_of(:name) }
     it { should validate_presence_of(:description) }
+    it { should respond_to(:region_id) }
     it { should validate_presence_of(:user_id) }
+    it { should validate_presence_of(:venue_id) }
+    it { should validate_presence_of(:category_id) }
     it { should have_many(:ticket_types).dependent(:destroy) }
     it { should validate_uniqueness_of(:name).scoped_to([:venue_id, :start_at]) }
   end
@@ -62,7 +66,7 @@ RSpec.describe Event, type: :model do
     describe '.upcoming' do
       it 'should return upcoming events' do
         upcoming = Event.upcoming.map { |event| event.name }
-        expect(upcoming).to eq %w(abc bbbbb)
+        expect(upcoming).to eq %w(bbbbb abc)
       end
     end
 

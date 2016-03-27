@@ -19,7 +19,7 @@ describe EventDecorator do
     end
 
     it 'should return short description' do
-      expect(@event.short_description).to eq('a' * 197 + '...')
+      expect(@event.short_description).to eq('a' * 157 + '...')
     end
   end
 
