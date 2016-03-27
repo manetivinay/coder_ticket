@@ -56,6 +56,16 @@ RSpec.describe Event, type: :model do
         expect(event.upcoming?).to eq(true)
       end
     end
+
+    describe '#related' do
+      before(:each) do
+        @events = DataSupport.create_events
+      end
+
+      it 'should return related events' do
+        expect(@events[0].related.map { |e| e.name }).to match_array ['bbbbb']
+      end
+    end
   end
 
   context 'scope' do

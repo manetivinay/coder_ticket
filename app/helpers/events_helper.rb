@@ -20,6 +20,6 @@
 
 module EventsHelper
   def event_link(event, is_edit = false)
-    is_edit ? edit_event_path(event) : event
+    is_edit ? edit_event_path(event) : event_path(event)
   end
 end

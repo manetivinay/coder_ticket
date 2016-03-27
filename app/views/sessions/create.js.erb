@@ -1,5 +1,5 @@
 <% if @authenticate %>
-  location.href = '<%= restore_path %>';
+  location.href = '<%= root_path %>';
 <% else %>
   Materialize.toast('Invalid email or password', 1000, 'alert');
 <% end %>

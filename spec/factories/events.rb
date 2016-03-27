@@ -45,4 +45,13 @@ FactoryGirl.define do
     name 'bbbbb'
     is_published true
   end
+
+  factory :event4, class: Event do
+    start_at Time.zone.local(2016, 8, 20)
+    end_at Time.zone.local(2016, 10, 20)
+    image 'link'
+    description 'desc'
+    name 'ccccc'
+    is_published true
+  end
 end
