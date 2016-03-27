@@ -19,3 +19,4 @@
 .idea/
 /coverage/*
 /config/application.yml
+/public/uploads
