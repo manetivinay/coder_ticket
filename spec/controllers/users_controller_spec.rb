@@ -14,10 +14,6 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  before(:each) do
-    request.env["HTTP_REFERER"] = root_path
-  end
-
   context 'POST #create' do
     context 'create account successfully' do
       before(:each) do

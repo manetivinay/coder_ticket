@@ -19,9 +19,9 @@
 #
 
 class EventsController < ApplicationController
-  before_action :require_login, only: [:new, :create, :edit, :update, :mine]
+  before_action :require_login, only: [:new, :create, :edit, :update, :mine, :publish]
   before_action :get_event, only: [:show, :edit, :update, :publish]
-  before_action :check_owner, only: [:edit, :update]
+  before_action :check_owner, only: [:edit, :update, :publish]
   before_action :get_extra, only: [:new, :edit]
 
   def index

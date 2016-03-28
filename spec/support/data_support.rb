@@ -22,4 +22,18 @@ class DataSupport
     create(:event4, category: create(:category, name: 'Âm nhạc'),
            venue: create(:venue, region: Region.create(name: 'Da Nang')), user: create(:user, email: 'xxx@xxx.com'))
   end
+
+  def self.create_ticket_types(event)
+    tickets = [:ticket1, :ticket2, :ticket3]
+    tickets.map do |t|
+      create(t, event: event)
+    end
+  end
+
+  def self.create_sold_out_tickets(event)
+    tickets = [:ticket1, :ticket2, :ticket3]
+    tickets.map do |t|
+      create(t, event: event, max_quantity: 0)
+    end
+  end
 end
