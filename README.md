@@ -61,6 +61,14 @@ The following **required** functionality is complete:
 ### Issues
 * Dont know how to retrieve carrierwave image for edit form
 
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories:
+
+![Video Walkthrough](...)
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 ## License
 
     Copyright 2016 nongdenchet
