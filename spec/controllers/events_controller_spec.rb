@@ -172,38 +172,155 @@ RSpec.describe EventsController, type: :controller do
   end
 
   describe '#create' do
-    before(:each) do
-      session[:user_id] = @owner.id
-      allow_any_instance_of(CreateEventService).to receive(:execute).and_return(
-          {errors: [], event: @event}
-      )
-      post :create, format: :js
+    context 'mock' do
+      before(:each) do
+        session[:user_id] = @owner.id
+        allow_any_instance_of(CreateEventService).to receive(:execute).and_return(
+            {errors: [], event: @event}
+        )
+        post :create, format: :js
+      end
+
+      it 'should get errors' do
+        expect(assigns(:errors)).to eq([])
+      end
+
+      it 'should get event' do
+        expect(assigns(:event)).to eq(@event)
+      end
     end
 
-    it 'should get errors' do
-      expect(assigns(:errors)).to eq([])
-    end
+    context 'integration' do
+      before(:each) do
+        session[:user_id] = @user.id
+        allow_any_instance_of(Event).to receive(:local_image_url).and_return('link')
+      end
 
-    it 'should get event' do
-      expect(assigns(:event)).to eq(@event)
+      context 'error params' do
+        it 'should return venue errors' do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:invalid_venue)
+          }
+          expect(assigns(:errors)).to include("Region can't be blank")
+        end
+
+        it 'should return event errors' do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:invalid_event)
+          }
+          expect(assigns(:errors)).to include("Name can't be blank")
+        end
+
+        it 'should have at least one ticket types' do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:valid_event, category_id: Category.first.id)
+          }
+          expect(assigns(:errors)).to include("Event must have at least one ticket type")
+        end
+
+        it 'should have valid time' do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:invalid_time_event, category_id: Category.first.id)
+          }
+          expect(assigns(:errors)).to include("Start date must smaller than end date")
+        end
+
+        it 'should have valid time' do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:invalid_time_event_2, category_id: Category.first.id)
+          }
+          expect(assigns(:errors)).to include("Start date must larger than now")
+        end
+      end
+
+      context 'create success' do
+        before(:each) do
+          post :create, {
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:valid_event, category_id: Category.first.id),
+              ticket_types: [attributes_for(:ticket1), attributes_for(:ticket2)]
+          }
+        end
+
+        it 'should create event success' do
+          expect(Event.count).to eq(4)
+        end
+
+        it 'should have no error' do
+          expect(assigns(:errors)).to be_blank
+        end
+      end
     end
   end
 
   describe '#update' do
-    before(:each) do
-      session[:user_id] = @owner.id
-      allow_any_instance_of(UpdateEventService).to receive(:execute).and_return(
-          {errors: [], event: @event}
-      )
-      post :update, id: @event.id, format: :js
+    context 'mock' do
+      before(:each) do
+        session[:user_id] = @owner.id
+        allow_any_instance_of(UpdateEventService).to receive(:execute).and_return(
+            {errors: [], event: @event}
+        )
+        post :update, id: @event.id, format: :js
+      end
+
+      it 'should get errors' do
+        expect(assigns(:errors)).to eq([])
+      end
+
+      it 'should get event' do
+        expect(assigns(:event)).to eq(@event)
+      end
     end
 
-    it 'should get errors' do
-      expect(assigns(:errors)).to eq([])
-    end
+    context 'integration' do
+      before(:each) do
+        session[:user_id] = @owner.id
+        allow_any_instance_of(Event).to receive(:local_image_url).and_return('link')
+      end
 
-    it 'should get event' do
-      expect(assigns(:event)).to eq(@event)
+      context 'update errors' do
+        it 'should include event errors' do
+          post :update, {
+              id: @event.id,
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:invalid_event_2, category_id: Category.first.id),
+          }
+          expect(assigns(:errors)).to include("Name can't be blank")
+        end
+      end
+
+      context 'update success' do
+        before(:each) do
+          post :update, {
+              id: @event.id,
+              format: :js,
+              venue: attributes_for(:valid_venue),
+              event: attributes_for(:valid_event, category_id: Category.first.id),
+              ticket_types: [attributes_for(:ticket1), attributes_for(:ticket2)]
+          }
+          @event.reload
+        end
+
+        it 'should have no error' do
+          expect(assigns(:errors)).to be_blank
+        end
+
+        it 'should update event' do
+          expect(@event.name).to eq('name')
+          expect(@event.ticket_types.count).to eq(2)
+        end
+      end
     end
   end
 end

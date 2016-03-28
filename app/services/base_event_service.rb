@@ -10,10 +10,6 @@ class BaseEventService < BaseService
   end
 
   protected
-  def start_transaction
-    raise NotImplementedError.new("You must implement")
-  end
-
   def create_ticket_types
     if @params[:ticket_types]
       @params[:ticket_types].each do |data|

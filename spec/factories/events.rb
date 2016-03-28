@@ -54,4 +54,43 @@ FactoryGirl.define do
     name 'ccccc'
     is_published true
   end
+
+  factory :valid_event, class: Event do
+    start_at Time.zone.local(2016, 8, 20)
+    end_at Time.zone.local(2016, 10, 20)
+    image 'link'
+    description 'des'
+    name 'name'
+  end
+
+  factory :invalid_time_event, class: Event do
+    start_at Time.zone.local(2016, 11, 20)
+    end_at Time.zone.local(2016, 10, 20)
+    image 'link'
+    description 'des'
+    name 'name'
+  end
+
+  factory :invalid_time_event_2, class: Event do
+    start_at Time.zone.local(2015, 8, 20)
+    end_at Time.zone.local(2015, 10, 20)
+    image 'link'
+    description 'des'
+    name 'name'
+  end
+
+  factory :invalid_event, class: Event do
+    start_at Time.zone.local(2016, 8, 20)
+    end_at Time.zone.local(2016, 10, 20)
+    image 'link'
+    description 'des'
+  end
+
+  factory :invalid_event_2, class: Event do
+    start_at Time.zone.local(2016, 8, 20)
+    end_at Time.zone.local(2016, 10, 20)
+    image 'link'
+    name ''
+    description 'des'
+  end
 end

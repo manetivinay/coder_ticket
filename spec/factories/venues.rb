@@ -16,4 +16,15 @@ FactoryGirl.define do
     address 'address'
     region
   end
+
+  factory :invalid_venue, class: Venue do
+    name 'location'
+    address 'address'
+  end
+
+  factory :valid_venue, class: Venue do
+    name 'location'
+    address 'address'
+    region_id 1
+  end
 end

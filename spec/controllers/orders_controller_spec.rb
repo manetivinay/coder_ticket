@@ -64,7 +64,7 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'available' do
       before(:each) do
-        DataSupport.create_ticket_types(@event)
+        @ticket_types = DataSupport.create_ticket_types(@event)
       end
 
       it 'should contain error' do
@@ -78,6 +78,85 @@ RSpec.describe OrdersController, type: :controller do
         allow_any_instance_of(CreateOrderService).to receive(:create).and_return([])
         post :create, event_id: @event.id, format: :js
         expect(flash[:notice]).to eq('We have sent email to you')
+      end
+    end
+
+    context 'integration with service' do
+      before(:each) do
+        mail = double(:mail)
+        allow(mail).to receive(:deliver_later)
+        allow_any_instance_of(OrderMailer).to receive(:thank_you).and_return(mail)
+        @ticket_types = DataSupport.create_ticket_types(@event)
+        @ticket_ids = @ticket_types.map { |t| t.id }
+      end
+
+      context 'error' do
+        before(:each) do
+          post :create, {
+              event_id: @event.id,
+              order: attributes_for(:invalid_order),
+              ticket_ids: @ticket_ids, format: :js
+          }
+        end
+
+        it 'should return errors order' do
+          expect(assigns(:errors)).to include('Username can\'t be blank')
+        end
+
+        it 'should not create order' do
+          expect(Order.count).to eq(0)
+        end
+      end
+
+      context 'success' do
+        before(:each) do
+          post :create, {
+              event_id: @event.id,
+              ticket_quantities: [2, 0, 0],
+              order: attributes_for(:order),
+              ticket_ids: @ticket_ids, format: :js
+          }
+          @order = Order.first
+        end
+
+        it 'should create order' do
+          expect(Order.count).to eq(1)
+        end
+
+        it 'should have right email' do
+          expect(@order.email).to eq('nongdenchet@gmail.com')
+        end
+
+        it 'should have one ticket' do
+          expect(@order.ticket_orders.count).to eq(1)
+        end
+
+        it 'should have 2 quantity' do
+          expect(@order.ticket_orders.first.quantity).to eq(2)
+        end
+
+        it 'should buy vip' do
+          expect(@order.ticket_orders.first.ticket_type.name).to eq('vip')
+        end
+      end
+
+      context 'not enough ticket to buy' do
+        before(:each) do
+          post :create, {
+              event_id: @event.id,
+              ticket_quantities: [30, 0, 0],
+              order: attributes_for(:order),
+              ticket_ids: @ticket_ids, format: :js
+          }
+        end
+
+        it 'should return errors order' do
+          expect(assigns(:errors)).to include("Sorry, there are no more ticket for vip, please restart the page")
+        end
+
+        it 'should not create order' do
+          expect(Order.count).to eq(0)
+        end
       end
     end
   end
