@@ -65,7 +65,7 @@ The following **required** functionality is complete:
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](...)
+![Video Walkthrough](https://github.com/nongdenchet/coder_ticket/blob/master/coder_ticket.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
