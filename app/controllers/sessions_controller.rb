@@ -4,9 +4,7 @@ class SessionsController < ApplicationController
 
   def create
     @authenticate = authenticate
-    if @authenticate
-      store_user_id(@user.id)
-    end
+    store_user_id(@user.id) if @authenticate
     respond_to :js
   end
 
