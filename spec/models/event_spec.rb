@@ -52,7 +52,7 @@ RSpec.describe Event, type: :model do
       end
 
       it 'should return true' do
-        event.start_at = Time.zone.local(2016, 7, 20)
+        event.start_at = Time.zone.local(3000, 7, 20)
         expect(event.upcoming?).to eq(true)
       end
     end
